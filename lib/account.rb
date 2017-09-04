@@ -12,6 +12,7 @@ class Account
   end
 
   def withdraw_funds(amount)
+    raise 'no funds available' if balance < DEFAULT_BALANCE
     @balance -= amount
   end
 

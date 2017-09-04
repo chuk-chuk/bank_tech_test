@@ -5,6 +5,7 @@ describe Account do
   let(:default_balance) { 0 }
   let(:topup_amount) { 50 }
   let(:withdraw_amount) { 10 }
+  let(:bad_amount) { 60 }
 
   it "has a default balance of 0" do
     expect(account.balance).to eq default_balance
@@ -21,4 +22,11 @@ describe Account do
   it "allows to withdraw some funds from the account" do
     expect { account.withdraw_funds(withdraw_amount) }.to change { account.balance }.by -withdraw_amount
   end
+
+  it "throw an error if no funds left" do
+    account.make_deposit(topup_amount)
+    account.withdraw_funds(bad_amount)
+    expect { account.withdraw_funds(bad_amount) }.to raise_error('no funds available')
+  end
+
 end
