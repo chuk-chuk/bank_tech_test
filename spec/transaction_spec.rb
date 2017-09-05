@@ -2,7 +2,7 @@ require 'transaction'
 
 describe Transaction do
   subject(:transaction) { described_class.new }
-  let(:account) { double: account }
+  let(:account) { double :account }
 
 
   it { is_expected.to respond_to(:print_all) }
