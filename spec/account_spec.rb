@@ -42,6 +42,7 @@ describe Account do
   end
 
   it "allows to withdraw some funds from the account" do
+    account.make_deposit(topup_amount)
     expect { account.withdraw_funds(withdraw_amount) }.to change { account.balance }.by -withdraw_amount
   end
 
