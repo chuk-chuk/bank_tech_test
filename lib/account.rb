@@ -15,7 +15,7 @@ class Account
   end
 
   def withdraw_funds(amount)
-    raise 'no funds available' if @balance < DEFAULT_BALANCE
+    raise 'no funds available' if @balance < amount
     @balance -= amount
     @history.push([time_format, type, amount, balance])
   end

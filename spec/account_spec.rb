@@ -35,11 +35,6 @@ describe Account do
       expect { account.withdraw_funds(withdraw_amount) }.to change { account.history }.by  [[time, " ", 10, 40]]
     end
 
-    it "throw an error if no funds left" do
-      account.withdraw_funds(bad_amount)
-      expect { account.withdraw_funds(bad_amount) }.to raise_error('no funds available')
-    end
-
   end
 
   it "allows to make a deposit" do
@@ -50,5 +45,8 @@ describe Account do
     expect { account.withdraw_funds(withdraw_amount) }.to change { account.balance }.by -withdraw_amount
   end
 
+  it "throw an error if no funds left" do
+    expect { account.withdraw_funds(bad_amount) }.to raise_error 'no funds available'
+  end
 
 end
