@@ -6,9 +6,24 @@ describe Account do
   let(:topup_amount) { 50 }
   let(:withdraw_amount) { 10 }
   let(:bad_amount) { 60 }
+  let(:time) { Time.now.strftime("%H:%M") }
 
   it "has a default balance of 0" do
     expect(account.balance).to eq default_balance
+  end
+
+  it "starts with empty history log" do
+    expect(account.history).to eq []
+  end
+
+  it "records a deposit transaction into history log" do
+    account.make_deposit(topup_amount)
+    expect(account.history).not_to be_empty
+  end
+
+  it "records a withdraw transaction into history log" do
+    account.make_deposit(topup_amount)
+    expect { account.withdraw_funds(withdraw_amount) }.to change { account.history }.by  [[time, " ", 10, 40]]
   end
 
   it { is_expected.to respond_to(:make_deposit) }

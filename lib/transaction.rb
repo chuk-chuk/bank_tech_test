@@ -1,8 +1,8 @@
 class Transaction
-  attr_reader :history
+  attr_reader :account
 
-  def initialize
-    @history = []
+  def initialize(account)
+    @account = account
   end
 
 end
