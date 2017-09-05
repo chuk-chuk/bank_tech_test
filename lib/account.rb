@@ -20,6 +20,13 @@ class Account
     @history.push([time_format, type, amount, balance])
   end
 
+  def all_transactions
+    puts "date || credit || debit || balance"
+    @history.reverse.each do |row|
+      puts "#{row[0]} || #{row[1].to_f} || #{row[2].to_f} || #{'%.2f' % row[3]}"
+    end
+  end
+
   private
 
   def time_format
