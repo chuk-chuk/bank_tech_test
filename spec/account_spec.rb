@@ -1,7 +1,8 @@
 require 'account'
 
 describe Account do
-  subject(:account) { described_class.new }
+  subject(:account) { described_class.new(transaction) }
+  let(:transaction) { double :transaction, store: nil }
   let(:default_balance) { 0 }
   let(:topup_amount) { 50 }
   let(:withdraw_amount) { 10 }
@@ -14,13 +15,8 @@ describe Account do
       expect(account.balance).to eq default_balance
     end
 
-    it "starts with empty history log" do
-      expect(account.history).to eq []
-    end
-
     it { is_expected.to respond_to(:withdraw_funds) }
     it { is_expected.to respond_to(:make_deposit) }
-    it { is_expected.to respond_to(:all_transactions) }
 
   end
 
@@ -28,11 +24,13 @@ describe Account do
     before :each { account.make_deposit(topup_amount) }
 
     it "records a deposit transaction into history log" do
-      expect(account.history).not_to be_empty
+      expect(transaction).to receive(:store)
+      account.make_deposit(topup_amount)
     end
 
-    it "records a withdraw transaction into history log" do
-      expect { account.withdraw_funds(withdraw_amount) }.to change { account.history }.by  [[time, " ", 10, 40]]
+    it "records a deposit transaction into history log" do
+      expect(transaction).to receive(:store)
+      account.withdraw_funds(withdraw_amount)
     end
 
   end

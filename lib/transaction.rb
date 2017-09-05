@@ -1,19 +1,19 @@
 class Transaction
-  attr_reader :account
+  attr_reader :history
 
-  def initialize(account)
-    @account = account
+  def initialize
+    @history = []
   end
 
-  def deposit(amount)
-    @account.make_deposit(amount)
-  end
-
-  def withdraw(amount)
-    @account.withdraw_funds(amount)
+  def store(time_format, amount, type, balance)
+    @history.push([time_format, amount, type, balance])
   end
 
   def print_all
-    @account.all_transactions
+    puts "date || credit || debit || balance"
+    @history.reverse.each do |row|
+      puts "#{row[0]} || #{row[1].to_f} || #{row[2].to_f} || #{'%.2f' % row[3]}"
+    end
   end
+
 end
