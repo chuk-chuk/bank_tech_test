@@ -15,7 +15,7 @@ class Account
   def withdraw_funds(amount)
     raise 'no funds available' if @balance < amount
     @balance -= amount
-    transaction.store(time_format, amount, type, balance)
+    transaction.store(time_format, type, amount, balance)
   end
 
   private
