@@ -1,8 +1,10 @@
 require 'account'
+require "transaction_log"
 
 describe Account do
   subject(:account) { described_class.new(transaction_log) }
-  let(:transaction_log) { double :transaction_log, store: nil }
+  let(:transaction_log) { double :transaction_log, store: nil, history: [] }
+  let(:statement) { double :statement }
   let(:default_balance) { 0 }
   let(:topup_amount) { 50 }
   let(:withdraw_amount) { 10 }
@@ -17,11 +19,12 @@ describe Account do
 
     it { is_expected.to respond_to(:withdraw_funds) }
     it { is_expected.to respond_to(:make_deposit) }
+    it { is_expected.to respond_to(:print_statement) }
 
   end
 
   context "transactions tracking" do
-    before :each { account.make_deposit(topup_amount) }
+    before { account.make_deposit(topup_amount) }
 
     it "records a deposit transaction into history log" do
       expect(transaction_log).to receive(:store)
@@ -48,4 +51,8 @@ describe Account do
     expect { account.withdraw_funds(bad_amount) }.to raise_error 'no funds available'
   end
 
+  it "prints the statement of all records" do
+    allow_any_instance_of(Statement).to receive(:print)
+    account.print_statement
+  end
 end
