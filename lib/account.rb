@@ -1,28 +1,29 @@
 require_relative 'transaction_log'
+require_relative 'record'
 
 class Account
-  attr_reader :balance, :type, :transaction_log
+  attr_reader :balance, :transaction_log
 
   def initialize(transaction_log)
     @balance = 0
     @transaction_log = transaction_log
-    @type = " "
   end
 
   def make_deposit(amount)
     @balance += amount
-    transaction_log.store(time_format, amount, type, balance)
+    transaction_log.store(:credit, amount, balance)
   end
 
   def withdraw_funds(amount)
     raise 'no funds available' if @balance < amount
     @balance -= amount
-    transaction_log.store(time_format, type, amount, balance)
+    transaction_log.store(:debit, amount, balance)
   end
 
-  private
-
-  def time_format
-    Time.now.strftime("%H:%M")
+  def print_all
+    puts "date || credit || debit || balance"
+    @history.reverse.each do |row|
+      puts "#{row[0]} || #{row[1].to_f} || #{row[2].to_f} || #{'%.2f' % row[3]}"
+    end
   end
 end

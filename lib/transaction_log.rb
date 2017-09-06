@@ -1,19 +1,19 @@
+require_relative 'record'
+
 class TransactionLog
-  attr_reader :history
+  attr_reader :history, :record, :amount, :balance, :type
 
-  def initialize
+  def initialize(record = Record)
     @history = []
+    @record = record
   end
 
-  def store(time_format, amount, type, balance)
-    @history.push([time_format, amount, type, balance])
+  def store(amount, type, balance)
+    @history << record.new(time_format, amount, type, balance)
   end
 
-  def print_all
-    puts "date || credit || debit || balance"
-    @history.reverse.each do |row|
-      puts "#{row[0]} || #{row[1].to_f} || #{row[2].to_f} || #{'%.2f' % row[3]}"
-    end
+  private
+  def time_format
+    Time.now.strftime("%H:%M")
   end
-
 end
