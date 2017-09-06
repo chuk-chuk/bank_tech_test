@@ -2,7 +2,7 @@ require_relative 'transaction_log'
 require_relative 'record'
 
 class Account
-  attr_reader :balance, :transaction_log
+  attr_reader :balance, :transaction_log, :history, :type
 
   def initialize(transaction_log)
     @balance = 0
@@ -22,8 +22,12 @@ class Account
 
   def print_all
     puts "date || credit || debit || balance"
-    @history.reverse.each do |row|
-      puts "#{row[0]} || #{row[1].to_f} || #{row[2].to_f} || #{'%.2f' % row[3]}"
+    transaction_log.history.reverse.each do |record|
+      if record.type == :credit
+        puts "#{record.time} ||  || #{'%.2f' % record.amount} || #{'%.2f' % record.balance}"
+      else
+        puts "#{record.time} || #{'%.2f' % record.amount} ||  || #{'%.2f' % record.balance}"
+      end
     end
   end
 end
