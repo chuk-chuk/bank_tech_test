@@ -56,6 +56,7 @@
       ],
       "/Users/yulialitvinchuk/Projects/bank_tech_test/lib/account.rb": [
         1,
+        null,
         1,
         1,
         null,
@@ -81,10 +82,9 @@
         1,
         7,
         null,
-        null,
         null
       ],
-      "/Users/yulialitvinchuk/Projects/bank_tech_test/lib/transaction.rb": [
+      "/Users/yulialitvinchuk/Projects/bank_tech_test/lib/transaction_log.rb": [
         1,
         1,
         null,
@@ -105,7 +105,46 @@
         null,
         null
       ],
-      "/Users/yulialitvinchuk/Projects/bank_tech_test/spec/transaction_spec.rb": [
+      "/Users/yulialitvinchuk/Projects/bank_tech_test/spec/record_spec.rb": [
+        1,
+        null,
+        1,
+        5,
+        5,
+        5,
+        5,
+        5,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/yulialitvinchuk/Projects/bank_tech_test/lib/record.rb": [
+        1,
+        1,
+        null,
+        1,
+        4,
+        4,
+        4,
+        4,
+        null,
+        null
+      ],
+      "/Users/yulialitvinchuk/Projects/bank_tech_test/spec/transaction_log_spec.rb": [
         1,
         null,
         1,
@@ -123,6 +162,6 @@
         null
       ]
     },
-    "timestamp": 1504638635
+    "timestamp": 1504695912
   }
 }

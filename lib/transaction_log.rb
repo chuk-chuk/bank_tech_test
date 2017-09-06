@@ -1,4 +1,4 @@
-class Transaction
+class TransactionLog
   attr_reader :history
 
   def initialize

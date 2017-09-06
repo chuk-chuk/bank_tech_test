@@ -1,7 +1,7 @@
-require 'transaction'
+require 'transaction_log'
 
-describe Transaction do
-  subject(:transaction) { described_class.new }
+describe TransactionLog do
+  subject(:transaction_log) { described_class.new }
   let(:account) { double :account }
 
 
@@ -9,7 +9,7 @@ describe Transaction do
   it { is_expected.to respond_to(:store) }
 
   it "starts with empty trnsaction log" do
-    expect(transaction.history).to eq []
+    expect(transaction_log.history).to eq []
   end
 
 end

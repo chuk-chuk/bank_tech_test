@@ -1,8 +1,8 @@
 require 'account'
 
 describe Account do
-  subject(:account) { described_class.new(transaction) }
-  let(:transaction) { double :transaction, store: nil }
+  subject(:account) { described_class.new(transaction_log) }
+  let(:transaction_log) { double :transaction_log, store: nil }
   let(:default_balance) { 0 }
   let(:topup_amount) { 50 }
   let(:withdraw_amount) { 10 }
@@ -24,12 +24,12 @@ describe Account do
     before :each { account.make_deposit(topup_amount) }
 
     it "records a deposit transaction into history log" do
-      expect(transaction).to receive(:store)
+      expect(transaction_log).to receive(:store)
       account.make_deposit(topup_amount)
     end
 
-    it "records a deposit transaction into history log" do
-      expect(transaction).to receive(:store)
+    it "records a withdraw transaction into history log" do
+      expect(transaction_log).to receive(:store)
       account.withdraw_funds(withdraw_amount)
     end
 
