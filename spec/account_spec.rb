@@ -3,8 +3,7 @@ require "transaction_log"
 
 describe Account do
   subject(:account) { described_class.new(transaction_log) }
-  let(:transaction_log) { double :transaction_log, store: nil, history: [] }
-  let(:statement) { double :statement }
+  let(:transaction_log) { TransactionLog.new }
   let(:default_balance) { 0 }
   let(:topup_amount) { 50 }
   let(:withdraw_amount) { 10 }

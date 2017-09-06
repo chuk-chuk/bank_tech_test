@@ -13,13 +13,13 @@ class Account
 
   def make_deposit(amount)
     @balance += amount
-    transaction_log.store(:credit, amount, balance)
+    transaction_log.store(amount,:credit, balance)
   end
 
   def withdraw_funds(amount)
     raise 'no funds available' if @balance < amount
     @balance -= amount
-    transaction_log.store(:debit, amount, balance)
+    transaction_log.store(amount,:debit, balance)
   end
 
   def print_statement

@@ -1,9 +1,9 @@
 require 'record'
 
 describe Record do
-  subject(:record) { described_class.new(time, type, amount, balance)}
+  subject(:record) { described_class.new(time, amount, type, balance)}
   let(:time) { Time.now.strftime("%H:%M") }
-  let(:type) { 'credit' }
+  let(:type) { :credit }
   let(:amount) { 50 }
   let(:balance) { 60 }
 

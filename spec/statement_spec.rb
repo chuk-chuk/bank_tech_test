@@ -2,10 +2,11 @@ require 'statement'
 
 describe Statement do
   subject(:statement) { described_class.new }
-  let(:transaction_log) { double :transaction_log, history: [record] }
+  let(:transaction_log) { TransactionLog.new }
+  before { allow(Time).to receive(:now).and_return(Time.mktime(2017,1,1,15,45)) }
 
   context "credit" do
-    let(:record) { double :record, type: :credit, time: "15:45", amount: 40, balance: 40 }
+    before { transaction_log.store(40, :credit, 40) }
     let(:body) { "date || credit || debit || balance\n15:45 ||  || 40.00 || 40.00\n" }
 
     it "receives the method print" do
@@ -14,7 +15,7 @@ describe Statement do
   end
 
   context "debit" do
-    let(:record) { double :record, type: :debit, time: "15:45", amount: 40, balance: 40 }
+    before { transaction_log.store(40, :debit, 40) }
     let(:body) { "date || credit || debit || balance\n15:45 || 40.00 ||  || 40.00\n" }
 
     it "receives the method print" do
